@@ -21,7 +21,7 @@ const prisma = new PrismaClient();
 
 // Main landing page
 app.get('/', async function(req, res) {
-    res.render('index');
+    res.render('index', { msg: '', color: '' }); // Provide default values
 });
 
 // Create a new post
@@ -47,7 +47,6 @@ app.post('/subscribe', async function(req, res) {
     } catch (error) {
         console.log(error);
         res.render('index', { msg : error , color: "#d9534f" });
-        res.render('index');
     }
 });
 
