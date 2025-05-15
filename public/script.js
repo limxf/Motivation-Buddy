@@ -1,5 +1,5 @@
 document.getElementById('signup-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
+  // e.preventDefault();
 
   const name = document.getElementById('name').value.trim();
   const phone = document.getElementById('phone').value.trim();

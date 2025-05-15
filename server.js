@@ -46,35 +46,31 @@ const prisma = new PrismaClient();
 
 // Main landing page
 app.get('/', async function(req, res) {
-    res.render('/index');
+    res.render('index');
 });
 
 // Create a new post
 app.post('/subscribe', async function(req, res) {
-    
-    // Try-Catch for any errors
     try {
-        // Get the title and content from submitted form
-        const { name, phone, start_date, message_time } = req.body;
+        console.log("Received POST /subscribe");
+        console.log(req.body); // Add this line
 
-        // Reload page if empty title or content
+        const { name, phone, 'start-date': start_date, 'message-time': message_time } = req.body;
+
         if (!name || !phone || !start_date || !message_time) {
             console.log("Unable to sign up");
-            res.render('/');
+            res.render('index');
         } else {
-            // Create post and store in database
-            const blog = await prisma.post.create({
-                data: { name, phone,start_date,message_time },
+            await prisma.post.create({
+                data: { name, phone, start_date, message_time },
             });
-
-            // Redirect back to the homepage
-            res.redirect('/index');
+            res.redirect('/');
+            console.log("inserted into database");
         }
-      } catch (error) {
+    } catch (error) {
         console.log(error);
-        res.render('/index');
-      }
-
+        res.render('index');
+    }
 });
 
 
