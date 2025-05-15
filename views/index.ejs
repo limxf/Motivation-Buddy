@@ -10,9 +10,9 @@
     <h1 id="title">Motivation Buddy Sign Up Form</h1>
     <form id="signup-form" action="/subscribe" method="post">
       <label for="name">Name:</label>
-      <input type="text" id="name" name="name" placeholder="Enter your name" required>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required value="haha">
       
-      <label for="phone">Mobile Number:</label>
+      <label for="phone" >Mobile Number:</label>
 <input
   type="tel"
   id="phone"
@@ -21,14 +21,15 @@
   pattern="^[89][0-9]{7}$"
   required
   title="Enter an 8-digit number starting with 8 or 9."
+  value="88888888"
 >
 <span id="phoneValidationMsg" class="validation-msg"></span>
      
       <label for="start-date">Start Date:</label>
-  <input type="date" id="start-date" name="start-date" required>
+  <input type="date" id="start-date" name="start-date" required value="01/01/2025">
 
   <label for="message-time">Time to Receive Message:</label>
-  <input type="time" id="message-time" name="message-time" required>
+  <input type="time" id="message-time" name="message-time" required value="00:00">
   
    <button type="submit" id="subscribe-btn">Subscribe</button>
   <span id="formValidationMsg" class="validation-msg"></span>
@@ -41,6 +42,6 @@
       You can approach tasks with confidence and focus. 
     </p>
   </div>
-  <script src="script.js"></script>
+  <script src="/script.js"></script>
 </body>
 </html>

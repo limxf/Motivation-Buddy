@@ -9,15 +9,15 @@ var app = express()
 app.set('view engine', 'ejs');
 
 // Needed for public directory
-app.use(express.static(__dirname ));
+app.use(express.static(__dirname + '/public'));
 
 // Needed for parsing form data
 app.use(express.json());       
 app.use(express.urlencoded({extended: true}));
 
-// // Needed for Prisma to connect to database
-// const { PrismaClient } = require('@prisma/client')
-// const prisma = new PrismaClient();
+// Needed for Prisma to connect to database
+const { PrismaClient } = require('@prisma/client')
+const prisma = new PrismaClient();
 
 //   try {
 //     // Send data to your backend (replace '/subscribe' with your actual endpoint)
@@ -46,7 +46,7 @@ app.use(express.urlencoded({extended: true}));
 
 // Main landing page
 app.get('/', async function(req, res) {
-    res.render('/index.html');
+    res.render('/index');
 });
 
 // Create a new post
@@ -55,24 +55,24 @@ app.post('/subscribe', async function(req, res) {
     // Try-Catch for any errors
     try {
         // Get the title and content from submitted form
-        const { title, content } = req.body;
+        const { name, phone, start_date, message_time } = req.body;
 
         // Reload page if empty title or content
-        if (!title || !content) {
-            console.log("Unable to create new post, no title or content");
+        if (!name || !phone || !start_date || !message_time) {
+            console.log("Unable to sign up");
             res.render('/');
         } else {
             // Create post and store in database
             const blog = await prisma.post.create({
-                data: { title, content },
+                data: { name, phone,start_date,message_time },
             });
 
             // Redirect back to the homepage
-            res.redirect('/');
+            res.redirect('/index');
         }
       } catch (error) {
         console.log(error);
-        res.render('/');
+        res.render('/index');
       }
 
 });
