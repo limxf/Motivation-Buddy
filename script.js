@@ -26,35 +26,35 @@ document.getElementById('signup-form').addEventListener('submit', async function
     return;
   }
 
-  // Prepare data to send
-  const formData = {
-    name: name,
-    phone: phone,
-    start_date: startDate,
-    message_time: messageTime
-  };
+  // // Prepare data to send
+  // const formData = {
+  //   name: name,
+  //   phone: phone,
+  //   start_date: startDate,
+  //   message_time: messageTime
+  // };
 
-  try {
-    // Send data to your backend (replace '/subscribe' with your actual endpoint)
-    const response = await fetch('/subscribe', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    });
+  // try {
+  //   // Send data to your backend (replace '/subscribe' with your actual endpoint)
+  //   const response = await fetch('/subscribe', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(formData)
+  //   });
 
-    if (response.ok) {
-      validationMsg.style.color = 'green';
-      validationMsg.textContent = 'Subscription successful!';
-      // Optionally, reset the form
-      document.getElementById('signup-form').reset();
-    } else {
-      validationMsg.style.color = '#d9534f';
-      validationMsg.textContent = 'Subscription failed. Please try again.';
-    }
-  } catch (error) {
-    validationMsg.style.color = '#d9534f';
-    validationMsg.textContent = 'An error occurred. Please try again.';
-  }
+  //   if (response.ok) {
+  //     validationMsg.style.color = 'green';
+  //     validationMsg.textContent = 'Subscription successful!';
+  //     // Optionally, reset the form
+  //     document.getElementById('signup-form').reset();
+  //   } else {
+  //     validationMsg.style.color = '#d9534f';
+  //     validationMsg.textContent = 'Subscription failed. Please try again.';
+  //   }
+  // } catch (error) {
+  //   validationMsg.style.color = '#d9534f';
+  //   validationMsg.textContent = 'An error occurred. Please try again.';
+  // }
 });
