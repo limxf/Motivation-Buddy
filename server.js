@@ -19,31 +19,6 @@ app.use(express.urlencoded({extended: true}));
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient();
 
-//   try {
-//     // Send data to your backend (replace '/subscribe' with your actual endpoint)
-//     const response = await fetch('/subscribe', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify(formData)
-//     });
-
-//     if (response.ok) {
-//       validationMsg.style.color = 'green';
-//       validationMsg.textContent = 'Subscription successful!';
-//       // Optionally, reset the form
-//       document.getElementById('signup-form').reset();
-//     } else {
-//       validationMsg.style.color = '#d9534f';
-//       validationMsg.textContent = 'Subscription failed. Please try again.';
-//     }
-//   } catch (error) {
-//     validationMsg.style.color = '#d9534f';
-//     validationMsg.textContent = 'An error occurred. Please try again.';
-//   }
-
-
 // Main landing page
 app.get('/', async function(req, res) {
     res.render('index');
@@ -58,17 +33,20 @@ app.post('/subscribe', async function(req, res) {
         const { name, phone, 'start-date': start_date, 'message-time': message_time } = req.body;
 
         if (!name || !phone || !start_date || !message_time) {
-            console.log("Unable to sign up");
-            res.render('index');
+            res.render('index', { msg : "Please fill out all fields.", color: "#d9534f" });
         } else {
             await prisma.post.create({
                 data: { name, phone, start_date, message_time },
             });
-            res.redirect('/');
-            console.log("inserted into database");
+            res.render('index', { msg : "Subscriptio has been added successful!", color: "green" });
+          
+
+    //               validationMsg.style.color = 'green';
+    //   validationMsg.textContent = 'Subscription successful!';
         }
     } catch (error) {
         console.log(error);
+        res.render('index', { msg : error , color: "#d9534f" });
         res.render('index');
     }
 });
